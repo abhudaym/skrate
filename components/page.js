@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import Head from "next/head";
 import { forwardRef } from "react";
 // @mui
@@ -23,4 +22,5 @@ const Page = forwardRef(({ children, meta, title, ...other }, ref) => (
   </>
 ));
 
+Page.displayName = "Page";
 export default Page;
