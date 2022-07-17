@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Page from "../components/Page";
+import Page1 from "../components/Page1";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { styled, useTheme } from "@mui/material/styles";
 import Layout from "../components/Layout";
@@ -33,20 +33,17 @@ const Dashboard = () => {
     }
 
     const fetchData = async () => {
-      try {
-        const data = await axios.get(
-          "https://mocki.io/v1/bb11aecd-ba61-44b9-9e2c-beabc442d818"
-        );
-        const { dashboard_stats, upcoming_sessions, job_postings } = data.data;
-        setStats(dashboard_stats);
-        setSessions(upcoming_sessions);
-        setJobs(job_postings);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-      fetchData();
+      const data = await axios.get(
+        "https://mocki.io/v1/bb11aecd-ba61-44b9-9e2c-beabc442d818"
+      );
+      const { dashboard_stats, upcoming_sessions, job_postings } = data.data;
+      setStats(dashboard_stats);
+      setSessions(upcoming_sessions);
+      setJobs(job_postings);
+      setLoading(false);
     };
+
+    fetchData();
   }, [user, stats, loading]);
 
   useEffect(() => {
@@ -59,7 +56,7 @@ const Dashboard = () => {
   }, [selected]);
 
   return (
-    <Page title="Skrate - Dashboard">
+    <Page1 title="Skrate - Dashboard">
       {loading ? (
         <h1>Loading</h1>
       ) : (
@@ -145,7 +142,7 @@ const Dashboard = () => {
           </Container>
         </Layout>
       )}
-    </Page>
+    </Page1>
   );
 };
 

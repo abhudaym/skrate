@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 // @mui
 import { Box } from "@mui/material";
 
-const Page = forwardRef(({ children, meta, title, ...other }, ref) => (
+const Page1 = forwardRef(({ children, meta, title, ...other }, ref) => (
   <>
     <Head>
       <title>{`${title}`}</title>
@@ -22,5 +22,5 @@ const Page = forwardRef(({ children, meta, title, ...other }, ref) => (
   </>
 ));
 
-Page.displayName = "Page";
-export default Page;
+Page1.displayName = "Page1";
+export default Page1;
