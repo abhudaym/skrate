@@ -9,6 +9,8 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import bg1 from "../assets/images/bg1.png";
 import bg2 from "../assets/images/bg2.png";
 import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const RootStyle = styled("div")(({ theme }) => ({
   fontFamily: "Poppins !important",
@@ -47,9 +49,9 @@ const StyledImg1 = styled("img")(({ theme }) => ({
   position: "absolute",
   top: 0,
   right: 0,
-  height: "400px",
+  width: "500px",
   [theme.breakpoints.down("lg")]: {
-    height: "180px",
+    width: "250px",
   },
 }));
 
@@ -71,11 +73,17 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 }));
 
 export default function Home() {
+  const router = useRouter();
   const { user, signIn } = useAuth();
   console.log(user);
   const signUpHandler = async () => {
     await signIn();
   };
+
+  useEffect(() => {
+    if (user) router.push("/dashboard");
+  }, [user]);
+
   return (
     <Page title="Skrate - Login">
       <StyledImg1 src={bg1.src} />

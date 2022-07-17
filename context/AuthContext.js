@@ -4,6 +4,7 @@ import {
   signOut,
   signInWithPopup,
   GoogleAuthProvider,
+  getAdditionalUserInfo,
 } from "firebase/auth";
 import { auth } from "../config/firebase";
 
@@ -26,6 +27,7 @@ export const AuthContextProvider = ({ children }) => {
           uid: user.uid,
           email: user.email,
           displayName: user.displayName,
+          displayPic: user.photoURL,
         });
       } else {
         setUser(null);
@@ -46,7 +48,7 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, signIn }}>
+    <AuthContext.Provider value={{ user, logout, signIn }}>
       {loading ? null : children}
     </AuthContext.Provider>
   );
