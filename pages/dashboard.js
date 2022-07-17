@@ -26,24 +26,27 @@ const Dashboard = () => {
   const mdScreen = useMediaQuery(theme.breakpoints.between("md", "lg"));
   const smScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-  useEffect(async () => {
+  useEffect(() => {
     if (!user) {
       router.push("/");
       setLoading(false);
     }
 
-    try {
-      const data = await axios.get(
-        "https://mocki.io/v1/bb11aecd-ba61-44b9-9e2c-beabc442d818"
-      );
-      const { dashboard_stats, upcoming_sessions, job_postings } = data.data;
-      setStats(dashboard_stats);
-      setSessions(upcoming_sessions);
-      setJobs(job_postings);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
+    const fetchData = async () => {
+      try {
+        const data = await axios.get(
+          "https://mocki.io/v1/bb11aecd-ba61-44b9-9e2c-beabc442d818"
+        );
+        const { dashboard_stats, upcoming_sessions, job_postings } = data.data;
+        setStats(dashboard_stats);
+        setSessions(upcoming_sessions);
+        setJobs(job_postings);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+      fetchData();
+    };
   }, [user, stats, loading]);
 
   useEffect(() => {
