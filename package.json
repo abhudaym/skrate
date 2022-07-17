@@ -16,6 +16,7 @@
     "@hookform/resolvers": "^2.8.8",
     "@iconify/icons-carbon": "^1.2.2",
     "@iconify/react": "^3.1.4",
+    "@mui/icons-material": "^5.8.4",
     "@mui/lab": "^5.0.0-alpha.71",
     "@mui/material": "^5.4.4",
     "autosuggest-highlight": "^3.2.1",
