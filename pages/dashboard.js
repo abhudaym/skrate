@@ -3,10 +3,12 @@ import Page from "../components/Page";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { styled, useTheme } from "@mui/material/styles";
 import Layout from "../components/Layout";
-import { Container, Divider, Grid, Stack } from "@mui/material";
+import { Card, Container, Divider, Grid, Stack } from "@mui/material";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import Sidebar from "../components/Sidebar";
+import Overview from "../components/Overview";
+import Sessions from "../components/Sessions";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -54,7 +56,6 @@ const Dashboard = () => {
                     >
                       <Sidebar
                         title="Home"
-                        //   onClick={setSelected("home")}
                         active={selected == "home" ? true : false}
                       />
                     </div>
@@ -70,7 +71,6 @@ const Dashboard = () => {
                     >
                       <Sidebar
                         title="Shuffle"
-                        //   onClick={setSelected("shuffle")}
                         active={selected == "shuffle" ? true : false}
                       />
                     </div>
@@ -83,6 +83,15 @@ const Dashboard = () => {
                   flexItem
                   sx={{ color: "black", height: "100vh", top: "-120px" }}
                 />
+                <Grid item lg={6}>
+                  <Stack>
+                    <Overview />
+                    <Sessions />
+                  </Stack>
+                </Grid>
+                <Grid item lg={4}>
+                  <Jobs />
+                </Grid>
               </Grid>
             </Container>
           )}
