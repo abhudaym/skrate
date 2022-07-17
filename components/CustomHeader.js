@@ -2,6 +2,16 @@ import { AppBar, Container, Typography } from "@mui/material";
 import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Logo from "../assets/images/skrate_logo.png";
+import { styled } from "@mui/material/styles";
+
+const LogoImg = styled(LazyLoadImage)(({ theme }) => ({
+  position: "relative",
+  top: "-20px",
+  [theme.breakpoints.down("lg")]: {
+    height: "150px",
+    top: 0,
+  },
+}));
 
 const CustomHeader = () => {
   return (
@@ -16,10 +26,7 @@ const CustomHeader = () => {
           justifyContent: "flex-start",
         }}
       >
-        <LazyLoadImage
-          src={Logo.src}
-          sx={{ position: "relative", top: "-20px" }}
-        />
+        <LogoImg src={Logo.src} />
       </Container>
     </AppBar>
   );
