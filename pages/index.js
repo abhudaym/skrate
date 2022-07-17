@@ -8,6 +8,7 @@ import styles from "../styles/Home.module.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import bg1 from "../assets/images/bg1.png";
 import bg2 from "../assets/images/bg2.png";
+import { useAuth } from "../context/AuthContext";
 
 const RootStyle = styled("div")(({ theme }) => ({
   fontFamily: "Poppins !important",
@@ -70,6 +71,11 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 }));
 
 export default function Home() {
+  const { user, signIn } = useAuth();
+  console.log(user);
+  const signUpHandler = async () => {
+    await signIn();
+  };
   return (
     <Page title="Skrate - Login">
       <StyledImg1 src={bg1.src} />
@@ -82,7 +88,9 @@ export default function Home() {
                 Welcome Back to
                 <br /> Skrate
               </H1style>
-              <Btn variant="contained">Sign In with Google</Btn>
+              <Btn variant="contained" onClick={signUpHandler}>
+                Sign In with Google
+              </Btn>
             </Stack>
           </StyledContainer>
         </Layout>
