@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import Sidebar from "../components/Sidebar";
 import Overview from "../components/Overview";
 import Sessions from "../components/Sessions";
+import Jobs from "../components/Jobs";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -38,7 +39,11 @@ const Dashboard = () => {
           {lgScreen && (
             <Container
               maxWidth
-              sx={{ marginTop: "150px", paddingLeft: "0!important" }}
+              sx={{
+                marginTop: "150px",
+                paddingLeft: "0!important",
+                paddingRight: "0!important",
+              }}
             >
               <Grid container>
                 <Grid item lg={2}>
@@ -77,12 +82,12 @@ const Dashboard = () => {
                   </Stack>
                 </Grid>
 
-                <Divider
+                {/* <Divider
                   orientation="vertical"
                   variant="middle"
                   flexItem
                   sx={{ color: "black", height: "100vh", top: "-120px" }}
-                />
+                /> */}
                 <Grid item lg={6}>
                   <Stack>
                     <Overview />

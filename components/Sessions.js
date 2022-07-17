@@ -1,10 +1,16 @@
-import { Card, Stack, Typography, Button } from "@mui/material";
-import { Container } from "@mui/system";
-import { useAuth } from "../context/AuthContext";
+import {
+  Button,
+  Card,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React from "react";
+import { useAuth } from "../context/AuthContext";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
-const SCard = () => {
+const SCard = ({ title, number }) => {
   const { user, logout } = useAuth();
 
   return (
@@ -12,19 +18,14 @@ const SCard = () => {
       sx={{
         margin: "5px",
         paddingTop: "10px",
-        paddingBottom: "20px",
         boxShadow: "none!important",
       }}
     >
       <Stack
         direction="row"
-        justifyContent="space-between"
+        justifyContent="space-around"
         alignItems="center"
-        sx={{
-          paddingLeft: "20px",
-          paddingRight: "20px",
-          minHeight: "80px",
-        }}
+        sx={{ paddingLeft: "20px", paddingRight: "20px", minHeight: "80px" }}
       >
         <Typography
           variant="p"
@@ -46,7 +47,7 @@ const SCard = () => {
               paddingLeft: "5px",
             }}
           >
-            Flutter Developer
+            {user.displayName}
           </Typography>
           <Typography
             variant="p"
@@ -55,17 +56,7 @@ const SCard = () => {
               paddingLeft: "5px",
             }}
           >
-            Google
-          </Typography>
-          <Typography
-            variant="p"
-            sx={{
-              fontFamily: "Poppins !important",
-              fontSize: "12px",
-              paddingLeft: "5px",
-            }}
-          >
-            Remote
+            Flutter
           </Typography>
         </Stack>
         <Stack>
@@ -77,45 +68,51 @@ const SCard = () => {
               paddingLeft: "5px",
             }}
           >
-            2 Hrs Ago
+            14:00 - 15: 00
+          </Typography>
+          <Typography
+            variant="p"
+            sx={{
+              fontFamily: "Poppins !important",
+              paddingLeft: "5px",
+            }}
+          >
+            24/10/21
           </Typography>
         </Stack>
+        <Button>Mentorship</Button>
         <ArrowRightAltIcon sx={{ fontWeight: 600 }} />
       </Stack>
     </Card>
   );
 };
 
-const Jobs = () => {
+const Sessions = () => {
   return (
-    <>
+    <Stack sx={{ marginBottom: "25px" }}>
       <Card
-        sx={{
-          marginRight: "20px",
-          boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
-        }}
+        sx={{ margin: "0 40px", boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)" }}
       >
-        <Container sx={{ paddingTop: "20px" }}>
+        <Container sx={{ paddingTop: "20px", paddingBottom: "20px" }}>
           <Typography
             variant="h5"
             sx={{
               fontFamily: "Poppins !important",
-              paddingBottom: "20px",
               marginBottom: "10px",
               marginLeft: "10px",
               fontWeight: 500,
             }}
           >
-            New Jobs
+            Upcoming Sessions
           </Typography>
           <Stack>
-            <SCard />
-            <SCard />
+            <SCard title="lsak" number={99} />
+            <SCard title="lsak" number={99} />
           </Stack>
         </Container>
       </Card>
-    </>
+    </Stack>
   );
 };
 
-export default Jobs;
+export default Sessions;
