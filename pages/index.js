@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import Head from "next/head";
 import Image from "next/image";
 import Layout from "../components/Layout";
-import Page from "../components/Page";
+import Page1 from "../components/Page1";
 import styles from "../styles/Home.module.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import bg1 from "../assets/images/bg1.png";
@@ -85,7 +85,7 @@ export default function Home() {
   }, [user]);
 
   return (
-    <Page title="Skrate - Login">
+    <Page1 title="Skrate - Login">
       <StyledImg1 src={bg1.src} />
       <StyledImg2 src={bg2.src} />
       <RootStyle>
@@ -103,6 +103,6 @@ export default function Home() {
           </StyledContainer>
         </Layout>
       </RootStyle>
-    </Page>
+    </Page1>
   );
 }
