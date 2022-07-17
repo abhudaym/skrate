@@ -69,6 +69,16 @@ const Dashboard = () => {
               paddingRight: "0!important",
             }}
           >
+            <Divider
+              sx={{
+                marginBottom: "5px",
+                position: "relative",
+                top: "-50px",
+                width: "85%",
+                left: "250px",
+                color: "#FDFDFD",
+              }}
+            />
             <Grid container>
               {lgScreen && (
                 <Grid item lg={2} md={12}>
@@ -104,16 +114,19 @@ const Dashboard = () => {
                         active={selected == "shuffle" ? true : false}
                       />
                     </div>
+                    {/* <Divider
+                      orientation="vertical"
+                      sx={{
+                        color: "#FDFDFD",
+                        position: "relative",
+                        height: "100vh",
+                        top: "-245px",
+                      }}
+                    /> */}
                   </Stack>
                 </Grid>
               )}
 
-              {/* <Divider
-                  orientation="vertical"
-                  variant="middle"
-                  flexItem
-                  sx={{ color: "black", height: "100vh", top: "-120px" }}
-                /> */}
               <Grid item lg={6} md={12}>
                 <Stack>
                   <Overview stats={stats} />

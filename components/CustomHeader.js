@@ -1,4 +1,11 @@
-import { AppBar, Button, Container, Stack, Typography } from "@mui/material";
+import {
+  AppBar,
+  Button,
+  Container,
+  Divider,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React, { useEffect } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Logo from "../assets/images/skrate_logo1.png";
