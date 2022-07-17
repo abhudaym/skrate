@@ -60,61 +60,62 @@ const Dashboard = () => {
       {loading ? (
         <h1>Loading</h1>
       ) : (
-        <Layout>
-          <Container
-            maxWidth
-            sx={{
-              marginTop: "150px",
-              paddingLeft: "0!important",
-              paddingRight: "0!important",
-            }}
-          >
-            <Divider
+        user && (
+          <Layout>
+            <Container
+              maxWidth
               sx={{
-                marginBottom: "5px",
-                position: "relative",
-                top: "-50px",
-                width: "85%",
-                left: "250px",
-                color: "#FDFDFD",
+                marginTop: "150px",
+                paddingLeft: "0!important",
+                paddingRight: "0!important",
               }}
-            />
-            <Grid container>
-              {lgScreen && (
-                <Grid item lg={2} md={12}>
-                  <Stack>
-                    <div
-                      onClick={() => {
-                        setSelected("home");
-                      }}
-                      style={{
-                        cursor: "pointer",
-                        marginBottom: "40px",
-                        borderLeft:
-                          selected == "home" ? "5px solid #4F65F6" : "0px",
-                      }}
-                    >
-                      <Sidebar
-                        title="Home"
-                        active={selected == "home" ? true : false}
-                      />
-                    </div>
-                    <div
-                      onClick={() => {
-                        setSelected("shuffle");
-                      }}
-                      style={{
-                        cursor: "pointer",
-                        borderLeft:
-                          selected == "shuffle" ? "5px solid #4F65F6" : "0px",
-                      }}
-                    >
-                      <Sidebar
-                        title="Shuffle"
-                        active={selected == "shuffle" ? true : false}
-                      />
-                    </div>
-                    {/* <Divider
+            >
+              <Divider
+                sx={{
+                  marginBottom: "5px",
+                  position: "relative",
+                  top: "-50px",
+                  width: "85%",
+                  left: "250px",
+                  color: "#FDFDFD",
+                }}
+              />
+              <Grid container>
+                {lgScreen && (
+                  <Grid item lg={2} md={12}>
+                    <Stack>
+                      <div
+                        onClick={() => {
+                          setSelected("home");
+                        }}
+                        style={{
+                          cursor: "pointer",
+                          marginBottom: "40px",
+                          borderLeft:
+                            selected == "home" ? "5px solid #4F65F6" : "0px",
+                        }}
+                      >
+                        <Sidebar
+                          title="Home"
+                          active={selected == "home" ? true : false}
+                        />
+                      </div>
+                      <div
+                        onClick={() => {
+                          setSelected("shuffle");
+                        }}
+                        style={{
+                          cursor: "pointer",
+                          borderLeft:
+                            selected == "shuffle" ? "5px solid #4F65F6" : "0px",
+                        }}
+                      >
+                        <Sidebar
+                          title="Shuffle"
+                          active={selected == "shuffle" ? true : false}
+                        />
+                      </div>
+                      {/* <Divider
                       orientation="vertical"
                       sx={{
                         color: "#FDFDFD",
@@ -123,24 +124,25 @@ const Dashboard = () => {
                         top: "-245px",
                       }}
                     /> */}
+                    </Stack>
+                  </Grid>
+                )}
+
+                <Grid item lg={6} md={12}>
+                  <Stack>
+                    <Overview stats={stats} />
+                    <Sessions
+                      sessions={shuffle ? [...sessions].reverse() : sessions}
+                    />
                   </Stack>
                 </Grid>
-              )}
-
-              <Grid item lg={6} md={12}>
-                <Stack>
-                  <Overview stats={stats} />
-                  <Sessions
-                    sessions={shuffle ? [...sessions].reverse() : sessions}
-                  />
-                </Stack>
+                <Grid item lg={4} md={12}>
+                  <Jobs jobs={shuffle ? [...jobs].reverse() : jobs} />
+                </Grid>
               </Grid>
-              <Grid item lg={4} md={12}>
-                <Jobs jobs={shuffle ? [...jobs].reverse() : jobs} />
-              </Grid>
-            </Grid>
-          </Container>
-        </Layout>
+            </Container>
+          </Layout>
+        )
       )}
     </Page1>
   );

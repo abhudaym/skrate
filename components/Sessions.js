@@ -32,7 +32,7 @@ const SCard = ({ mentor, timing, date, sessionType }) => {
           sx={{ fontFamily: "Poppins !important", fontWeight: 500 }}
         >
           <img
-            src={user.displayPic}
+            src={user && user.displayPic}
             height="40px"
             width="40px"
             style={{ borderRadius: "100%" }}
