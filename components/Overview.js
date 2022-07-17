@@ -40,39 +40,44 @@ const SCard = ({ title, number }) => {
   );
 };
 
-const Overview = () => {
+const Overview = ({ stats }) => {
   return (
     <Stack sx={{ marginBottom: "25px" }}>
       <Card
         sx={{ margin: "0 40px", boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)" }}
       >
-        <Container sx={{ paddingTop: "20px", paddingBottom: "20px" }}>
-          <Typography
-            variant="h5"
-            sx={{
-              fontFamily: "Poppins !important",
-              marginBottom: "10px",
-              marginLeft: "10px",
-              fontWeight: 500,
-            }}
-          >
-            Overview
-          </Typography>
-          <Grid container>
-            <Grid item lg={6}>
-              <SCard title="Profile Views" number={89} />
+        {stats && (
+          <Container sx={{ paddingTop: "20px", paddingBottom: "20px" }}>
+            <Typography
+              variant="h5"
+              sx={{
+                fontFamily: "Poppins !important",
+                marginBottom: "10px",
+                marginLeft: "10px",
+                fontWeight: 500,
+              }}
+            >
+              Overview
+            </Typography>
+            <Grid container>
+              <Grid item md={6}>
+                <SCard title="Profile Views" number={stats.profile_views} />
+              </Grid>
+              <Grid item md={6}>
+                <SCard
+                  title="Mentorship Sessions"
+                  number={stats.mentorship_sessions}
+                />
+              </Grid>
+              <Grid item md={6}>
+                <SCard title="Jobs Applied" number={stats.jobs_applied} />
+              </Grid>
+              <Grid item md={6}>
+                <SCard title="Skills Verified" number={stats.skills_verified} />
+              </Grid>
             </Grid>
-            <Grid item lg={6}>
-              <SCard title="Mentorship Sessions" number={5} />
-            </Grid>
-            <Grid item lg={6}>
-              <SCard title="Jobs Applied" number={3} />
-            </Grid>
-            <Grid item lg={6}>
-              <SCard title="Skills Verified" number={3} />
-            </Grid>
-          </Grid>
-        </Container>
+          </Container>
+        )}
       </Card>
     </Stack>
   );

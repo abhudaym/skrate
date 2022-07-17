@@ -10,6 +10,7 @@ import Sidebar from "../components/Sidebar";
 import Overview from "../components/Overview";
 import Sessions from "../components/Sessions";
 import Jobs from "../components/Jobs";
+import axios from "axios";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -17,18 +18,32 @@ const Dashboard = () => {
   const theme = useTheme();
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState("home");
+  const [stats, setStats] = useState(null);
+  const [sessions, setSessions] = useState(null);
+  const [jobs, setJobs] = useState(null);
   const lgScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const mdScreen = useMediaQuery(theme.breakpoints.between("md", "lg"));
   const smScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!user) {
       router.push("/");
       setLoading(false);
-    } else if (user) {
-      setLoading(false);
     }
-  }, [user]);
+
+    try {
+      const data = await axios.get(
+        "https://mocki.io/v1/bb11aecd-ba61-44b9-9e2c-beabc442d818"
+      );
+      const { dashboard_stats, upcoming_sessions, job_postings } = data.data;
+      setStats(dashboard_stats);
+      setSessions(upcoming_sessions);
+      setJobs(job_postings);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [user, stats, loading]);
 
   return (
     <Page title="Skrate - Dashboard">
@@ -36,17 +51,17 @@ const Dashboard = () => {
         <h1>Loading</h1>
       ) : (
         <Layout>
-          {lgScreen && (
-            <Container
-              maxWidth
-              sx={{
-                marginTop: "150px",
-                paddingLeft: "0!important",
-                paddingRight: "0!important",
-              }}
-            >
-              <Grid container>
-                <Grid item lg={2}>
+          <Container
+            maxWidth
+            sx={{
+              marginTop: "150px",
+              paddingLeft: "0!important",
+              paddingRight: "0!important",
+            }}
+          >
+            <Grid container>
+              {lgScreen && (
+                <Grid item lg={2} md={12}>
                   <Stack>
                     <div
                       onClick={() => {
@@ -81,25 +96,25 @@ const Dashboard = () => {
                     </div>
                   </Stack>
                 </Grid>
+              )}
 
-                {/* <Divider
+              {/* <Divider
                   orientation="vertical"
                   variant="middle"
                   flexItem
                   sx={{ color: "black", height: "100vh", top: "-120px" }}
                 /> */}
-                <Grid item lg={6}>
-                  <Stack>
-                    <Overview />
-                    <Sessions />
-                  </Stack>
-                </Grid>
-                <Grid item lg={4}>
-                  <Jobs />
-                </Grid>
+              <Grid item lg={6} md={12}>
+                <Stack>
+                  <Overview stats={stats} />
+                  <Sessions sessions={sessions} />
+                </Stack>
               </Grid>
-            </Container>
-          )}
+              <Grid item lg={4} md={12}>
+                <Jobs jobs={jobs} />
+              </Grid>
+            </Grid>
+          </Container>
         </Layout>
       )}
     </Page>

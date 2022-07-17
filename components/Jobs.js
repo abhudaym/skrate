@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import React from "react";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
-const SCard = () => {
+const SCard = ({ role, organization, location, date }) => {
   const { user, logout } = useAuth();
 
   return (
@@ -12,7 +12,7 @@ const SCard = () => {
       sx={{
         margin: "5px",
         paddingTop: "10px",
-        paddingBottom: "20px",
+        paddingBottom: "25px",
         boxShadow: "none!important",
       }}
     >
@@ -46,7 +46,7 @@ const SCard = () => {
               paddingLeft: "5px",
             }}
           >
-            Flutter Developer
+            {role}
           </Typography>
           <Typography
             variant="p"
@@ -55,7 +55,7 @@ const SCard = () => {
               paddingLeft: "5px",
             }}
           >
-            Google
+            {organization}
           </Typography>
           <Typography
             variant="p"
@@ -65,7 +65,7 @@ const SCard = () => {
               paddingLeft: "5px",
             }}
           >
-            Remote
+            {location}
           </Typography>
         </Stack>
         <Stack>
@@ -77,7 +77,7 @@ const SCard = () => {
               paddingLeft: "5px",
             }}
           >
-            2 Hrs Ago
+            {date}
           </Typography>
         </Stack>
         <ArrowRightAltIcon sx={{ fontWeight: 600 }} />
@@ -86,7 +86,7 @@ const SCard = () => {
   );
 };
 
-const Jobs = () => {
+const Jobs = ({ jobs }) => {
   return (
     <>
       <Card
@@ -109,8 +109,16 @@ const Jobs = () => {
             New Jobs
           </Typography>
           <Stack>
-            <SCard />
-            <SCard />
+            {jobs.map((item, i) => {
+              return (
+                <SCard
+                  role={item.role}
+                  organization={item.organization_name}
+                  location={item.location}
+                  date={item.date_posted}
+                />
+              );
+            })}
           </Stack>
         </Container>
       </Card>

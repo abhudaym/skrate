@@ -10,7 +10,7 @@ import React from "react";
 import { useAuth } from "../context/AuthContext";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
-const SCard = ({ title, number }) => {
+const SCard = ({ mentor, timing, date, sessionType }) => {
   const { user, logout } = useAuth();
 
   return (
@@ -23,7 +23,7 @@ const SCard = ({ title, number }) => {
     >
       <Stack
         direction="row"
-        justifyContent="space-around"
+        justifyContent="space-between"
         alignItems="center"
         sx={{ paddingLeft: "20px", paddingRight: "20px", minHeight: "80px" }}
       >
@@ -47,7 +47,7 @@ const SCard = ({ title, number }) => {
               paddingLeft: "5px",
             }}
           >
-            {user.displayName}
+            {mentor}
           </Typography>
           <Typography
             variant="p"
@@ -68,7 +68,7 @@ const SCard = ({ title, number }) => {
               paddingLeft: "5px",
             }}
           >
-            14:00 - 15: 00
+            {timing}
           </Typography>
           <Typography
             variant="p"
@@ -77,17 +77,27 @@ const SCard = ({ title, number }) => {
               paddingLeft: "5px",
             }}
           >
-            24/10/21
+            {date}
           </Typography>
         </Stack>
-        <Button>Mentorship</Button>
+        <Button
+          sx={{
+            color: "black",
+            bgcolor: sessionType == "Review" ? "#91AEE1" : "#E8C9D1",
+            fontSize: "12px",
+            fontFamily: "Poppins !important",
+            textTransform: "none",
+          }}
+        >
+          {sessionType}
+        </Button>
         <ArrowRightAltIcon sx={{ fontWeight: 600 }} />
       </Stack>
     </Card>
   );
 };
 
-const Sessions = () => {
+const Sessions = ({ sessions }) => {
   return (
     <Stack sx={{ marginBottom: "25px" }}>
       <Card
@@ -106,8 +116,17 @@ const Sessions = () => {
             Upcoming Sessions
           </Typography>
           <Stack>
-            <SCard title="lsak" number={99} />
-            <SCard title="lsak" number={99} />
+            {sessions &&
+              sessions.map((item, i) => {
+                return (
+                  <SCard
+                    mentor={item.mentor_name}
+                    timing={item.timings}
+                    date={item.date}
+                    sessionType={item.session_type}
+                  />
+                );
+              })}
           </Stack>
         </Container>
       </Card>
