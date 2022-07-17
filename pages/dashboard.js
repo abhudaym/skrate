@@ -21,6 +21,7 @@ const Dashboard = () => {
   const [stats, setStats] = useState(null);
   const [sessions, setSessions] = useState(null);
   const [jobs, setJobs] = useState(null);
+  const [shuffle, setShuffle] = useState(false);
   const lgScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const mdScreen = useMediaQuery(theme.breakpoints.between("md", "lg"));
   const smScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -44,6 +45,15 @@ const Dashboard = () => {
       console.log(error);
     }
   }, [user, stats, loading]);
+
+  useEffect(() => {
+    if (selected == "shuffle") {
+      setShuffle(true);
+    }
+    if (selected == "home") {
+      setShuffle(false);
+    }
+  }, [selected]);
 
   return (
     <Page title="Skrate - Dashboard">
@@ -107,11 +117,13 @@ const Dashboard = () => {
               <Grid item lg={6} md={12}>
                 <Stack>
                   <Overview stats={stats} />
-                  <Sessions sessions={sessions} />
+                  <Sessions
+                    sessions={shuffle ? [...sessions].reverse() : sessions}
+                  />
                 </Stack>
               </Grid>
               <Grid item lg={4} md={12}>
-                <Jobs jobs={jobs} />
+                <Jobs jobs={shuffle ? [...jobs].reverse() : jobs} />
               </Grid>
             </Grid>
           </Container>

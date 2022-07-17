@@ -98,6 +98,7 @@ const SCard = ({ mentor, timing, date, sessionType }) => {
 };
 
 const Sessions = ({ sessions }) => {
+  console.log(sessions);
   return (
     <Stack sx={{ marginBottom: "25px" }}>
       <Card
@@ -124,6 +125,7 @@ const Sessions = ({ sessions }) => {
                     timing={item.timings}
                     date={item.date}
                     sessionType={item.session_type}
+                    key={i}
                   />
                 );
               })}

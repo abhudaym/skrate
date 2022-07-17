@@ -116,6 +116,7 @@ const Jobs = ({ jobs }) => {
                   organization={item.organization_name}
                   location={item.location}
                   date={item.date_posted}
+                  key={i}
                 />
               );
             })}
